@@ -2,7 +2,7 @@
 
 ## Description
 
-The User Management System API is a RESTful web service for managing user data. It provides functionality for creating, reading, updating, and deleting users in a database. This API can be used for applications that require user management features such as authentication, authorization, or profile management.
+The User Management System API is a RESTful web service for managing user data. It provides functionality for creating, reading, updating, and deleting users in a database. Look at the postman collection to check APIs
 
 ## Features
 
