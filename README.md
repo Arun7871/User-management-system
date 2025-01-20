@@ -1,80 +1,84 @@
-User Management System API
+# User Management System API
 
-Description
+## Description
 
 The User Management System API is a RESTful web service for managing user data. It provides functionality for creating, reading, updating, and deleting users in a database. This API can be used for applications that require user management features such as authentication, authorization, or profile management.
 
-Features
+## Features
 
-User Creation: Add a new user with their details.
+- **User Creation**: Add a new user with their details.
+- **User Retrieval**: Fetch details of a single user or a list of all users.
+- **User Update**: Update user information.
+- **User Deletion**: Remove a user from the system.
 
-User Retrieval: Fetch details of a single user or a list of all users.
-
-User Update: Update user information.
-
-User Deletion: Remove a user from the system.
-
-Prerequisites
+## Prerequisites
 
 To run this project, ensure you have the following installed:
 
-Node.js
+- Node.js
+- PostgreSQL
+- Postman (for API testing, optional)
 
-PostgreSQL
+## Setup Instructions
 
-Postman (for API testing, optional)
+### Clone the Repository
 
-Setup Instructions
-
-Clone the Repository
-
+```bash
 git clone https://github.com/Arun7871/User-management-system.git
 cd User-management-system
+```
 
-Install Dependencies
+### Install Dependencies
 
+```bash
 npm install
+```
 
-Setup Environment Variables
-Create a .env file in the root directory and add the following variables:
+### Setup Environment Variables
 
+Create a `.env` file in the root directory and add the following variables:
+
+```env
 PORT=5000
 DB_HOST=localhost
 DB_USER=your_postgres_username
 DB_PASSWORD=your_postgres_password
 DB_NAME=user_management
+```
 
-Run Database Migrations
+### Run Database Migrations
+
 Initialize your PostgreSQL database and apply any required migrations (if applicable).
 
-Start the Server
+### Start the Server
 
+```bash
 npm start
+```
 
-The server will start on http://localhost:5000 (or the port specified in your .env file).
+The server will start on [http://localhost:5000](http://localhost:5000) (or the port specified in your `.env` file).
 
-API Endpoints
+## API Endpoints
 
-Base URL:
+**Base URL**: `http://localhost:5000`
 
-http://localhost:5000
+### 1. Create User
 
-Endpoints:
+**POST** `/users`
 
-1. Create User
+**Request Body (JSON):**
 
-POST /users
-
-Request Body (JSON):
-
+```json
 {
   "name": "John Doe",
   "email": "john.doe@example.com",
   "age": 30
 }
+```
 
-Response:
+**Response:**
 
+```json
 {
   "message": "User created successfully",
   "user": {
@@ -84,13 +88,15 @@ Response:
     "age": 30
   }
 }
+```
 
-2. Get All Users
+### 2. Get All Users
 
-GET /users
+**GET** `/users`
 
-Response:
+**Response:**
 
+```json
 [
   {
     "id": 1,
@@ -105,34 +111,40 @@ Response:
     "age": 25
   }
 ]
+```
 
-3. Get Single User
+### 3. Get Single User
 
-GET /users/:id
+**GET** `/users/:id`
 
-Response:
+**Response:**
 
+```json
 {
   "id": 1,
   "name": "John Doe",
   "email": "john.doe@example.com",
   "age": 30
 }
+```
 
-4. Update User
+### 4. Update User
 
-PUT /users/:id
+**PUT** `/users/:id`
 
-Request Body (JSON):
+**Request Body (JSON):**
 
+```json
 {
   "name": "John Updated",
   "email": "john.updated@example.com",
   "age": 35
 }
+```
 
-Response:
+**Response:**
 
+```json
 {
   "message": "User updated successfully",
   "user": {
@@ -142,23 +154,27 @@ Response:
     "age": 35
   }
 }
+```
 
-5. Delete User
+### 5. Delete User
 
-DELETE /users/:id
+**DELETE** `/users/:id`
 
-Response:
+**Response:**
 
+```json
 {
   "message": "User deleted successfully"
 }
+```
 
-Postman Collection
+## Postman Collection
 
-The Postman collection for testing the API can be downloaded from the repository: Postman Collection
+The Postman collection for testing the API can be downloaded from the repository: **Postman Collection**
 
-Folder Structure
+## Folder Structure
 
+```
 user-management-api/
 ├── node_modules/
 ├── src/
@@ -171,26 +187,24 @@ user-management-api/
 ├── package.json
 ├── README.md
 └── postman-collection.json
+```
 
-Technologies Used
+## Technologies Used
 
-Backend: Node.js, Express.js
+- **Backend**: Node.js, Express.js
+- **Database**: PostgreSQL
 
-Database: PostgreSQL
-
-Contribution
+## Contribution
 
 Contributions are welcome! Feel free to fork the repository and submit a pull request.
 
-License
+## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
-Contact
+## Contact
 
 For any questions or feedback, please contact:
 
-Author: Arun7871
-
-GitHub: Arun7871
-
+**Author**: Arun7871  
+**GitHub**: [Arun7871](https://github.com/Arun7871)
