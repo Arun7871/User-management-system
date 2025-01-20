@@ -7,16 +7,16 @@ The User Management System API is a RESTful web service for managing user data. 
 ## Features
 
 - **User Creation**: Add a new user with their details.
-- **User Retrieval**: Fetch details of a single user or a list of all users.
+- **User Retrieval**: Fetch details of a single user.
 - **User Update**: Update user information.
-- **User Deletion**: Remove a user from the system.
+- **Admin**: Can see all the users.
+- **User deletion**: can achieve by setting isActive attribute as false.
 
 ## Prerequisites
 
 To run this project, ensure you have the following installed:
 
 - Node.js
-- PostgreSQL
 - Postman (for API testing, optional)
 
 ## Setup Instructions
@@ -35,20 +35,7 @@ npm install
 ```
 
 ### Setup Environment Variables
-
-Create a `.env` file in the root directory and add the following variables:
-
-```env
-PORT=5000
-DB_HOST=localhost
-DB_USER=your_postgres_username
-DB_PASSWORD=your_postgres_password
-DB_NAME=user_management
-```
-
-### Run Database Migrations
-
-Initialize your PostgreSQL database and apply any required migrations (if applicable).
+```For the easy testing I have already used my mangoDB atlas DB. you can use that.```
 
 ### Start the Server
 
@@ -64,15 +51,16 @@ The server will start on [http://localhost:5000](http://localhost:5000) (or the 
 
 ### 1. Create User
 
-**POST** `/users`
+**POST** `api/auth/register`
 
 **Request Body (JSON):**
 
 ```json
 {
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "age": 30
+  "name": "Arun kumar",
+  "email": "arunanandhan243@gmail.com",
+  "password": "something",
+  "phone": "3243904234"
 }
 ```
 
@@ -80,65 +68,159 @@ The server will start on [http://localhost:5000](http://localhost:5000) (or the 
 
 ```json
 {
-  "message": "User created successfully",
-  "user": {
-    "id": 1,
-    "name": "John Doe",
-    "email": "john.doe@example.com",
-    "age": 30
-  }
+    "message": "User created successfully",
+    "user": {
+        "name": "Arun kumar",
+        "email": "arunanandhan243@gmail.com",
+        "password": "$2a$10$Hg2Noab0KBjjceFfVvtjFOnaw0ObzWMk5OwVcHNgIV.LcNDee7gSG",
+        "phone": "3243904234",
+        "role": "user",
+        "isActive": true,
+        "_id": "678e30a1c1722c796494c13f",
+        "createdAt": "2025-01-20T11:16:49.201Z",
+        "updatedAt": "2025-01-20T11:16:49.201Z",
+        "__v": 0
+    }
 }
 ```
+### 2. Login user
 
-### 2. Get All Users
+**GET** `/api/auth/login`
 
-**GET** `/users`
+**Response:**
+
+```json
+{
+  "email": "arunanandhan43@gmail.com",
+  "password": "iLoveProgramming"
+}
+```
+### 3. Get All Users by admin
+
+**GET** `/api/admin/users`
 
 **Response:**
 
 ```json
 [
-  {
-    "id": 1,
-    "name": "John Doe",
-    "email": "john.doe@example.com",
-    "age": 30
-  },
-  {
-    "id": 2,
-    "name": "Jane Smith",
-    "email": "jane.smith@example.com",
-    "age": 25
-  }
+    {
+        "isActive": true,
+        "_id": "678cf6147b29274a758767bc",
+        "name": "Super Admin",
+        "email": "admin@example.com",
+        "password": "$2a$10$7gLZTsDHrBXciG.csG9rI.ZcR64l.T/uzdWWhwwFN455LsMRnO8z6",
+        "phone": "1234567890",
+        "role": "admin",
+        "status": "active",
+        "createdAt": "2025-01-19T12:54:44.507Z",
+        "updatedAt": "2025-01-19T12:54:44.507Z",
+        "__v": 0
+    },
+    {
+        "isActive": true,
+        "_id": "678cf9f3c587783268b8cf1e",
+        "name": "John Doe",
+        "email": "john@example.com",
+        "password": "$2a$10$yBCD8kpZdPGMb3E/9Zk5Lu.SlTNWYhC.H2cYIvdmuWDwV2a1aTWDS",
+        "phone": "1234567890",
+        "role": "user",
+        "createdAt": "2025-01-19T13:11:15.118Z",
+        "updatedAt": "2025-01-19T13:11:15.118Z",
+        "__v": 0
+    },
+    {
+        "isActive": true,
+        "_id": "678cfaebc587783268b8cf24",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "password": "$2a$10$cYDHS8XecKKVsCf91LtwTuEeTTCMcZlY.jwmauSpJ2S12KScXbyKu",
+        "phone": "1234567890",
+        "role": "user",
+        "createdAt": "2025-01-19T13:15:23.473Z",
+        "updatedAt": "2025-01-19T13:15:23.473Z",
+        "__v": 0
+    },
+    {
+        "_id": "678d03dc0a1b7f28e1576bca",
+        "name": "Arun updated",
+        "email": "arunanandhan43@gmail.com",
+        "password": "$2a$10$oHm.n5uuh9CLU7cPWIL2heyTXjwhkTPan4hWMnHHayFZISMsUFH.q",
+        "phone": "9876543210",
+        "role": "user",
+        "isActive": false,
+        "createdAt": "2025-01-19T13:53:32.495Z",
+        "updatedAt": "2025-01-19T14:25:16.555Z",
+        "__v": 0
+    },
+    {
+        "_id": "678d11561c277b3827ee7ec3",
+        "name": "Super Admin",
+        "email": "superadmin13@example.com",
+        "password": "$2a$10$iP7mw3UKKYDU.Thz6bNC2.KX8yHDPHLL4Y5gQ6s9z8B3LeyKR3lT6",
+        "phone": "1232132310",
+        "role": "user",
+        "isActive": true,
+        "createdAt": "2025-01-19T14:51:02.852Z",
+        "updatedAt": "2025-01-19T14:51:02.852Z",
+        "__v": 0
+    },
+    {
+        "_id": "678d12d01c277b3827ee7ec7",
+        "name": "Super Admin",
+        "email": "superadmin19@example.com",
+        "password": "$2a$10$TMOPNelUkw7N0dPvxHFTIub3FluUzpG2d7YgGKkPb0v5RENrp.enO",
+        "phone": "1232132310",
+        "role": "admin",
+        "isActive": true,
+        "createdAt": "2025-01-19T14:57:20.253Z",
+        "updatedAt": "2025-01-19T14:57:20.253Z",
+        "__v": 0
+    },
+    {
+        "_id": "678d14411c277b3827ee7ed1",
+        "name": "Super Admin",
+        "email": "superadmin19@gmail.com",
+        "password": "$2a$10$qk/Rl9myQmcnc4OQ7M7b1.K6Ht6.ohFZ.//Hju5m0FbMXPkjm7Ij6",
+        "phone": "1232132310",
+        "role": "admin",
+        "isActive": true,
+        "createdAt": "2025-01-19T15:03:29.442Z",
+        "updatedAt": "2025-01-19T15:03:29.442Z",
+        "__v": 0
+    }
 ]
 ```
 
 ### 3. Get Single User
 
-**GET** `/users/:id`
+**GET** `/api/users/678d03dc0a1b7f28e1576bca`
 
 **Response:**
 
 ```json
 {
-  "id": 1,
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "age": 30
+    "_id": "678d03dc0a1b7f28e1576bca",
+    "name": "Arun updated",
+    "email": "arunanandhan43@gmail.com",
+    "password": "$2a$10$oHm.n5uuh9CLU7cPWIL2heyTXjwhkTPan4hWMnHHayFZISMsUFH.q",
+    "phone": "9876543210",
+    "role": "user",
+    "isActive": false,
+    "createdAt": "2025-01-19T13:53:32.495Z",
+    "updatedAt": "2025-01-19T14:25:16.555Z",
+    "__v": 0
 }
 ```
 
 ### 4. Update User
 
-**PUT** `/users/:id`
+**PUT** `http://localhost:5000/api/users/678d03dc0a1b7f28e1576bca`
 
 **Request Body (JSON):**
 
 ```json
 {
-  "name": "John Updated",
-  "email": "john.updated@example.com",
-  "age": 35
+        "name": "Arun kumar updated"
 }
 ```
 
@@ -146,25 +228,31 @@ The server will start on [http://localhost:5000](http://localhost:5000) (or the 
 
 ```json
 {
-  "message": "User updated successfully",
-  "user": {
-    "id": 1,
-    "name": "John Updated",
-    "email": "john.updated@example.com",
-    "age": 35
-  }
+    "message": "User created successfully",
+    "user": {
+        "name": "Arun kumar updated",
+        "email": "arunanandhan243@gmail.com",
+        "password": "$2a$10$Hg2Noab0KBjjceFfVvtjFOnaw0ObzWMk5OwVcHNgIV.LcNDee7gSG",
+        "phone": "3243904234",
+        "role": "user",
+        "isActive": true,
+        "_id": "678e30a1c1722c796494c13f",
+        "createdAt": "2025-01-20T11:16:49.201Z",
+        "updatedAt": "2025-01-20T11:16:49.201Z",
+        "__v": 0
+    }
 }
 ```
 
 ### 5. Delete User
 
-**DELETE** `/users/:id`
+**DELETE** `/api/users/678d03dc0a1b7f28e1576bca/deactivate`
 
 **Response:**
 
 ```json
 {
-  "message": "User deleted successfully"
+    "message": "Account deactivated successfully"
 }
 ```
 
@@ -192,19 +280,15 @@ user-management-api/
 ## Technologies Used
 
 - **Backend**: Node.js, Express.js
-- **Database**: PostgreSQL
+- **Database**: MangoDB
 
 ## Contribution
 
 Contributions are welcome! Feel free to fork the repository and submit a pull request.
 
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
 ## Contact
 
 For any questions or feedback, please contact:
 
-**Author**: Arun7871  
+**Author**: Arun
 **GitHub**: [Arun7871](https://github.com/Arun7871)
